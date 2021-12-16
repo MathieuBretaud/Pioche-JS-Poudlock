@@ -1,4 +1,3 @@
-
 // Notre variable qui contient le "module" app (un objet)
 let app = {
     // Tableau contenant le nom des 4 maisons
@@ -9,35 +8,58 @@ let app = {
         'maxopus'
     ],
     // Méthode appelée au chargement de la page
-    init: function() {
-     let formulaire = document.querySelector('form');
-     let formulaires = formulaire.addEventListener('click', app.Handlerformulaire)
+    init: function () {
+
+        app.bubble = document.querySelector('.speech');
+        app.form = document.querySelector('form');
+        app.input = document.querySelector('.name');
+
+
+        app.form.addEventListener('submit', app.handleSubmit);
     },
 
-    Handlerformulaire : function (evt){
+    handleSubmit: function (evt) {
         evt.preventDefault();
-        let moninput = document.querySelector('input');
-        let moniputValeur = moninput.value;
-        let maDiv = document.querySelector('.speech');
-        const img = document.createElement('img');
-        let maphoto = "images/anthorvus.png";
         
+        let name = app.input.value.trim();
+        let message;
 
-        if(moniputValeur.length ===  8){
-            
-            maDiv.innerHTML = '<img src="images/maxopus.png" /> ';
-            
-        }else if(moniputValeur.charAt(0)=== 'l' || moniputValeur.substr(moniputValeur.length - 1) === 'x'){
-
-            maDiv.innerHTML = '<img src="images/lustrix.png" /> ';
-            
-        }else if(moniputValeur.length % 5 || moniputValeur.length % 3){
-
-            maDiv.innerHTML = '<img src="images/anthorvus.png" /> ';
-        } else if (moniputValeur.length >0) {
-
-            maDiv.innerHTML = '<img src="images/darioptera.png" /> ';
+        if (name.length == 0) {
+            message = "Ça ne fonctionne qu'avec un nom !";
+        } else {
+            // Si un nom a été tapé, alors on exécute la méthode sortStudent et on stocke son résultat.
+            message = app.sortStudent(name);
         }
+
+        app.writeBubble(message);
+    },
+    
+    // Méthode qui choisit une maison et génère une image d'après le nom de la maison.
+    sortStudent: function (name) {
+        let house;
+
+        if (name.length == 8) {
+
+            house = 'maxopus';
+
+        } else if (name.charAt(0) == 'l' || name.charAt(name.length - 1) == 'x') {
+
+            house = "lustrix";
+
+        } else if (name.length % 5 == 0 || name.length % 3 == 0) {
+
+            house = "anthorvus";
+
+        } else {
+
+            house = "darioptera";
+        }
+        let image = '<img src="images/' + house + '.png" />';
+        return image;
+    },
+    // Méthode qui remplace le contenu de la bulle par le contenu passé en argument.
+    writeBubble: function (content) {
+        app.bubble.innerHTML = content;
     },
 }
 

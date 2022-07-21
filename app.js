@@ -10,33 +10,30 @@ let app = {
     ],
     // Méthode appelée au chargement de la page
     init: function() {
-     let formulaire = document.querySelector('form');
-     let formulaires = formulaire.addEventListener('click', app.Handlerformulaire)
+    let form = document.querySelector('form').addEventListener('click', app.HandleForm)
     },
 
-    Handlerformulaire : function (evt){
+    HandleForm : function (evt){
         evt.preventDefault();
-        let moninput = document.querySelector('input');
-        let moniputValeur = moninput.value;
-        let maDiv = document.querySelector('.speech');
-        const img = document.createElement('img');
-        let maphoto = "images/anthorvus.png";
+        let myInput = document.querySelector('input');
+        let myInputValue = myInput.value;
+        let myDiv = document.querySelector('.speech');
         
 
-        if(moniputValeur.length ===  8){
+        if(myInputValue.length ===  8){
             
-            maDiv.innerHTML = '<img src="images/maxopus.png" /> ';
+            myDiv.innerHTML = '<img src="images/maxopus.png" /> ';
             
-        }else if(moniputValeur.charAt(0)=== 'l' || moniputValeur.substr(moniputValeur.length - 1) === 'x'){
+        }else if(myInputValue.charAt(0)=== 'l' || myInputValue.substring(myInputValue.length - 1) === 'x'){
 
-            maDiv.innerHTML = '<img src="images/lustrix.png" /> ';
+            myDiv.innerHTML = '<img src="images/lustrix.png" /> ';
             
-        }else if(moniputValeur.length % 5 || moniputValeur.length % 3){
+        }else if(myInputValue.length % 5 || myInputValue.length % 3){
 
-            maDiv.innerHTML = '<img src="images/anthorvus.png" /> ';
-        } else if (moniputValeur.length >0) {
+            myDiv.innerHTML = '<img src="images/anthorvus.png" /> ';
+        } else if (myInputValue.length >0) {
 
-            maDiv.innerHTML = '<img src="images/darioptera.png" /> ';
+            myDiv.innerHTML = '<img src="images/darioptera.png" /> ';
         }
     },
 }
